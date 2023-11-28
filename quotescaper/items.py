@@ -5,8 +5,11 @@
 
 import scrapy
 
+class TagsProcessor(scrapy.Field):
+    def input_processor(self, values):
+        return values if isinstance(values, list) else [values]
 
 class QuotescaperItem(scrapy.Item):
-    # define the fields for your item here like:
-    # name = scrapy.Field()
-    pass
+    quote_text = scrapy.Field()
+    author = scrapy.Field()
+    tags = TagsProcessor()
